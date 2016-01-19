@@ -22,17 +22,16 @@ namespace Notepad
     /// </summary>
     public partial class MainWindow : Window
     {
-
-
-        //global variables for use in this class
-        public string filename = "New Document";
-        bool textChanged = false;
-
         public MainWindow()
         {
             InitializeComponent();
             Title = "QuikNote";
         }
+
+        //global variables for use in this class
+        public string filename = "New Document";
+        bool textChanged = false;
+
 
         //Methods for key actions in this program
         public void quickSave()
@@ -55,7 +54,7 @@ namespace Notepad
             Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
             dlg.FileName = filename;
             dlg.DefaultExt = ".text";
-            dlg.Filter = "Text documents (.txt) |*.txt";
+            dlg.Filter = "Text documents (.txt)|*.txt|CSharp File (.cs)|*.cs";
 
             Nullable<bool> result = dlg.ShowDialog();
 
@@ -72,7 +71,7 @@ namespace Notepad
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.FileName = "Document";
             dlg.DefaultExt = ".txt";
-            dlg.Filter = "Text documents (.txt) |*.txt";
+            dlg.Filter = "Text documents (.txt)|*.txt|CSharp File (.cs)|*.cs";
 
             Nullable<bool> result = dlg.ShowDialog();
 
@@ -85,7 +84,7 @@ namespace Notepad
             }
         }
 
-        private void MenuOpen_Click(object sender, RoutedEventArgs e)
+        public void warningMessage()
         {
             if (textChanged)
             {
@@ -95,6 +94,12 @@ namespace Notepad
                     SaveDiag();
                 }
             }
+        }
+
+        //Event Handlers
+        private void MenuOpen_Click(object sender, RoutedEventArgs e)
+        {
+            warningMessage();
             openDiag();
         }
 
@@ -121,15 +126,13 @@ namespace Notepad
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (textChanged)
-            {
-                MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Unsaved changes. Do you want to save your work first?", "Unsaved Work", System.Windows.MessageBoxButton.YesNo);
-                if (messageBoxResult == MessageBoxResult.Yes)
-                {
-                    SaveDiag();
-                }
-            }
+            warningMessage();
+        }
 
+        private void Clear_Doc_Click(object sender, RoutedEventArgs e)
+        {
+            warningMessage();
+            textBoxMain.Text = "";
         }
     }
 }
