@@ -26,12 +26,14 @@ namespace Notepad
         {
             InitializeComponent();
             Title = "QuikNote";
+            textBoxMain.AcceptsReturn = true;
         }
 
         //global variables for use in this class
         public string filename = "New Document";
         bool textChanged = false;
-
+        
+        
 
         //Methods for key actions in this program
         public void quickSave()
@@ -96,6 +98,18 @@ namespace Notepad
             }
         }
 
+        public void toggleSpellCheck()
+        {
+            if (MenuSpellCheck.IsChecked)
+            {
+                textBoxMain.SpellCheck.IsEnabled = true;
+            }
+            else
+            {
+                textBoxMain.SpellCheck.IsEnabled = false;
+            }
+        }
+
         //Event Handlers
         private void MenuOpen_Click(object sender, RoutedEventArgs e)
         {
@@ -133,6 +147,11 @@ namespace Notepad
         {
             warningMessage();
             textBoxMain.Text = "";
+        }
+
+        private void MenuSpellCheck_Click(object sender, RoutedEventArgs e)
+        {
+            toggleSpellCheck();
         }
     }
 }

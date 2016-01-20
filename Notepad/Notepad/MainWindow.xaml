@@ -34,6 +34,8 @@
             <MenuItem x:Name="MenuOpen" Header="Open.." Click="MenuOpen_Click" Margin="1,2,1,0"/>
             <MenuItem x:Name="MenuSave" Header="Save" Click="MenuSave_Click" Margin="1,2,1,0"/>
             <MenuItem x:Name="MenuSaveAs" Header="Save As.." Click="MenuSaveAs_Click" Margin="1,2,1,0"/>
+            <Separator Background="Yellow" BorderBrush="#FFFF0606" Foreground="#FFFF0404" Width="11" BorderThickness="8,0" />
+            <MenuItem x:Name="MenuSpellCheck" Header="Spell Check" IsCheckable="True" Margin="1,2,1,0" Click="MenuSpellCheck_Click"/>
         </Menu>
         <Grid Margin="105,131,303,174"/>
 
